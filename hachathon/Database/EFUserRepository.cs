@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using hachathon.Domain.Models;
 using hachathon.Domain.Repositories;
+using hachathon.Resource;
 using Microsoft.EntityFrameworkCore;
 
 namespace hachathon.Database
@@ -16,6 +18,29 @@ namespace hachathon.Database
         public async Task<IList<User>> ListAsync()
         {
             return await context.User.ToListAsync();
+        }
+
+        public async Task<IList<User>> ListWithParameters(QueryUserResource query)
+        {
+            var users = context.User.AsQueryable();
+            
+            if (query.StatusId.HasValue && query.StatusId > 0)
+                users = users.Where(u => u.StatusId == query.StatusId);
+
+            if (query.PlanId.HasValue && query.PlanId > 0)
+                users = users.Where(u => u.PlanId == query.PlanId);
+
+            if (query.Name != null)
+                users = users.Where(u => (u.Name + u.LastName).ToLower().Contains(query.Name.ToLower()));
+            
+            if (query.Address != null)
+                users = users.Where(u => u.Address.ToLower().Contains(query.Address.ToLower()));
+
+            if (query.Email != null)
+                users =  users.Where(u => u.Email.ToLower().Contains(query.Email));
+
+            return await users.Skip((query.Page - query.ItemsPerPage) * query.ItemsPerPage)
+                .Take(query.ItemsPerPage).ToListAsync();
         }
 
         public async Task<User> GetAsync(string id)

@@ -34,9 +34,15 @@ namespace hachathon.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IList<UserResource>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAllUser()
+        public async Task<IActionResult> GetAllUser(QueryUserResource queryUserResource)
         {
-            var users = await userRepository.ListAsync();
+            if(queryUserResource == null)
+                queryUserResource = new QueryUserResource();
+
+            if (queryUserResource.Page < 1) queryUserResource.Page = 1;
+            if (queryUserResource.ItemsPerPage < 1) queryUserResource.ItemsPerPage = 1;
+            
+            var users = await userRepository.ListWithParameters(queryUserResource);
             var resources = mapper.Map<IList<User>, IList<UserResource>>(users);
             return Ok(resources);
         }
