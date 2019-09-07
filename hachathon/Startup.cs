@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace hachathon
 {
@@ -32,8 +33,14 @@ namespace hachathon
             services.AddScoped<IPlanRepository, EFPlanRepository>();
             services.AddScoped<IStatusRepository, EFStatusRepository>();
             services.AddScoped<IPhoneRepository, EFPhoneRepository>();
+            services.AddScoped<IUserRepository, EFUserRepository>();
 
             services.AddAutoMapper(typeof(Startup));
+            
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1"});
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
@@ -52,6 +59,13 @@ namespace hachathon
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSwagger();
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();

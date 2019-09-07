@@ -36,7 +36,7 @@ namespace hachathon.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdatePhone(string id, PhoneResource phoneIn)
+        public async Task<IActionResult> UpdatePhone(int id, PhoneResource phoneIn)
         {
             var phone = mapper.Map<PhoneResource, Phone>(phoneIn);
             if (!await phoneRepository.IsPhoneExist(id))

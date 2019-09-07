@@ -55,7 +55,7 @@ namespace hachathon.Database
                 .HasDefaultValue(true);
 
             builder.Entity<Phone>().HasData(
-                new Phone {Id = 15, Number = "114-532-9991"},
+                new Phone {Id = 15, Number = "114-532-9991", Available = false},
                 new Phone {Id = 1, Number = "212-532-9991"},
                 new Phone {Id = 2, Number = "312-532-9911"},
                 new Phone {Id = 3, Number = "402-552-9291"},
@@ -70,6 +70,10 @@ namespace hachathon.Database
                 new Phone {Id = 12, Number = "442-552-9991"},
                 new Phone {Id = 13, Number = "552-532-9191"},
                 new Phone {Id = 14, Number = "662-555-9551"}
+            );
+
+            builder.Entity<User>().HasData(
+                new User {Id = "1", Name = "John", LastName = "Sin", Address = "Renton, WA", Email = "example@exmaple.com", Score = 312, Ssn = "445223", PhoneId = 1, PlanId = 1, StatusId = 1}
             );
 
         }

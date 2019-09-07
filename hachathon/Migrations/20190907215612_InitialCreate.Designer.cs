@@ -8,7 +8,7 @@ using hachathon.Database;
 namespace hachathon.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190907194352_InitialCreate")]
+    [Migration("20190907215612_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,8 +44,7 @@ namespace hachathon.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Number")
-                        .IsRequired();
+                    b.Property<string>("Number");
 
                     b.HasKey("Id");
 
@@ -255,6 +254,21 @@ namespace hachathon.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Address = "Renton, WA",
+                            Email = "example@exmaple.com",
+                            LastName = "Sin",
+                            Name = "John",
+                            PhoneId = 1,
+                            PlanId = 1,
+                            Score = 312,
+                            Ssn = "445223",
+                            StatusId = 1
+                        });
                 });
 
             modelBuilder.Entity("hachathon.Domain.Models.Document", b =>

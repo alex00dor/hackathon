@@ -7,7 +7,8 @@ namespace hachathon.Domain.Repositories
     public interface IPhoneRepository
     {
         Task<IList<Phone>> ListAsync();
+        Task<Phone> GetAsync(int id);
         void Update(Phone phone);
-        Task<bool> IsPhoneExist(string id);
+        Task<bool> IsPhoneExist(int id);
     }
 }

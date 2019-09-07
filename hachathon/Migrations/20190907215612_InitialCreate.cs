@@ -12,7 +12,7 @@ namespace hachathon.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Number = table.Column<string>(nullable: false),
+                    Number = table.Column<string>(nullable: true),
                     Available = table.Column<bool>(nullable: false, defaultValue: true)
                 },
                 constraints: table =>
@@ -210,6 +210,11 @@ namespace hachathon.Migrations
                 table: "Status",
                 columns: new[] { "Id", "Name" },
                 values: new object[] { 3, "Rejected" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Address", "Email", "LastName", "Name", "PhoneId", "PlanId", "Score", "Ssn", "StatusId" },
+                values: new object[] { "1", "Renton, WA", "example@exmaple.com", "Sin", "John", 1, 1, 312, "445223", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Document_UserId",

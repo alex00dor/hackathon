@@ -42,8 +42,7 @@ namespace hachathon.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(true);
 
-                    b.Property<string>("Number")
-                        .IsRequired();
+                    b.Property<string>("Number");
 
                     b.HasKey("Id");
 
@@ -253,6 +252,21 @@ namespace hachathon.Migrations
                     b.HasIndex("StatusId");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Address = "Renton, WA",
+                            Email = "example@exmaple.com",
+                            LastName = "Sin",
+                            Name = "John",
+                            PhoneId = 1,
+                            PlanId = 1,
+                            Score = 312,
+                            Ssn = "445223",
+                            StatusId = 1
+                        });
                 });
 
             modelBuilder.Entity("hachathon.Domain.Models.Document", b =>

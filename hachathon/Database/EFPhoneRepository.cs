@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using hachathon.Domain.Models;
 using hachathon.Domain.Repositories;
@@ -15,7 +16,12 @@ namespace hachathon.Database
         
         public async Task<IList<Phone>> ListAsync()
         {
-            return await context.Phone.ToListAsync();
+            return await context.Phone.Where(p => p.Available).ToListAsync();
+        }
+
+        public async Task<Phone> GetAsync(int id)
+        {
+            return await context.Phone.FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async void Update(Phone phone)
@@ -26,9 +32,9 @@ namespace hachathon.Database
             await context.SaveChangesAsync();
         }
 
-        public async Task<bool> IsPhoneExist(string id)
+        public async Task<bool> IsPhoneExist(int id)
         {
-            var phone = await context.Phone.FirstOrDefaultAsync(p => p.Id.ToString() == id);
+            var phone = await context.Phone.FirstOrDefaultAsync(p => p.Id == id);
             return phone != null;
         }
     }

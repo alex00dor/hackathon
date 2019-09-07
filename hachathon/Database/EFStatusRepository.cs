@@ -16,5 +16,16 @@ namespace hachathon.Database
         {
             return await context.Status.ToListAsync();
         }
+
+        public async Task<Status> GetAsync(int id)
+        {
+            return await context.Status.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<bool> IsStatusExist(int id)
+        {
+            var instance = await GetAsync(id);
+            return instance != null;
+        }
     }
 }

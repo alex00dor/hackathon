@@ -11,6 +11,7 @@ namespace hachathon.Mapping
             CreateMap<Plan, PlanResource>();
             CreateMap<Status, StatusResource>();
             CreateMap<Phone, PhoneResource>();
+            CreateMap<User, UserResource>();
         }
     }
     
@@ -21,6 +22,8 @@ namespace hachathon.Mapping
             CreateMap<PlanResource, Plan>();
             CreateMap<StatusResource, Status>();
             CreateMap<PhoneResource, Phone>();
+            CreateMap<UserResource, User>();
+            CreateMap<CreateUserResource, User>();
         }
     }
 }

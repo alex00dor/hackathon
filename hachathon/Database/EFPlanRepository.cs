@@ -16,5 +16,16 @@ namespace hachathon.Database
         {
             return await context.Plan.ToListAsync();
         }
+
+        public async Task<Plan> GetAsync(int id)
+        {
+            return await context.Plan.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<bool> IsPlanExist(int id)
+        {
+            var instance = await GetAsync(id);
+            return null != instance;
+        }
     }
 }
