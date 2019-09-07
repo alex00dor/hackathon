@@ -11,7 +11,6 @@ namespace hachathon.Domain.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
         [Phone]
         public string Number { get; set; }
 

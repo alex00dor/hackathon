@@ -1,4 +1,6 @@
+using AutoMapper;
 using hachathon.Database;
+using hachathon.Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,12 @@ namespace hachathon
             
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(Configuration["Data:Database:ConnectionString"]));
+
+            services.AddScoped<IPlanRepository, EFPlanRepository>();
+            services.AddScoped<IStatusRepository, EFStatusRepository>();
+            services.AddScoped<IPhoneRepository, EFPhoneRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });

@@ -8,7 +8,7 @@ namespace hachathon.ClientApp
 {
   [Route("/api/[controller]/")]
   [ApiController]
-  public class CreditScore : Controller
+  public class CreditScoreController : ControllerBase
   {
     [HttpGet("{ssn}")]
     [ProducesResponseType(typeof(CreditScoreResource), StatusCodes.Status200OK)]

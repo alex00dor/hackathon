@@ -5,6 +5,11 @@ namespace hachathon.Database
 {
     public class AppDbContext : DbContext
     {
+        public DbSet<Plan> Plan { get; set; }
+        public DbSet<Phone> Phone { get; set; }
+        public DbSet<Status> Status { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Document> Document { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
