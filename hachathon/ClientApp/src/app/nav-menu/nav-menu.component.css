@@ -4,6 +4,10 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+ul.navbar-nav li.nav-item a.pink {
+  background-color: hotpink;
+}
+
 html {
   font-size: 14px;
 }

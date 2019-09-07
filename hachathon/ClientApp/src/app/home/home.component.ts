@@ -5,4 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+
+  // public currentCount = 0;
+
+  // public incrementCounter() {
+  //   this.currentCount++;
+  // }
+
 }
